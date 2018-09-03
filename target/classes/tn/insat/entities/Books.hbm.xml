@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 janv. 2012 15:24:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class catalog="bookstoredb" name="tn.insat.entities.Book" table="books">
+  <id name="bookId" type="java.lang.Integer">
+   <column name="b_book_sk"/>
+   <generator class="identity"/>
+  </id>
+  <many-to-one class="tn.insat.entities.Publisher"
+   fetch="select" name="publisher">
+   <column name="b_publisher_fk"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="title" type="string">
+   <column length="450" name="b_title"/>
+  </property>
+  <property generated="never" lazy="false" name="pages" type="java.lang.Integer">
+   <column name="b_pages"/>
+  </property>
+  <set fetch="select" lazy="true" name="authors" sort="unsorted" table="book_author">
+   <key>
+    <column name="ba_book_fk" not-null="true"/>
+   </key>
+   <many-to-many entity-name="tn.insat.entities.Author" unique="false">
+    <column name="ba_author_fk" not-null="true"/>
+   </many-to-many>
+  </set>
+ </class>
+</hibernate-mapping>

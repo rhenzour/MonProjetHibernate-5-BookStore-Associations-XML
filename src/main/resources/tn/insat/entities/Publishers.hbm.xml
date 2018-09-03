@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 janv. 2012 15:24:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class catalog="bookstoredb" name="tn.insat.entities.Publisher" table="publishers">
+  <id name="publisherId" type="java.lang.Integer">
+   <column name="p_publisher_sk"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="name" type="string">
+   <column length="45" name="p_name"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="books"
+   sort="unsorted" table="books">
+   <key>
+    <column name="b_publisher_fk"/>
+   </key>
+   <one-to-many class="tn.insat.entities.Book"/>
+  </set>
+ </class>
+</hibernate-mapping>
